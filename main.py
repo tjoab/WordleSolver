@@ -180,4 +180,4 @@ while len(myWordList) != 1:
     else:
         pass
 
-# best opening guess is "rates" 
+# best opening guess is "rates"
