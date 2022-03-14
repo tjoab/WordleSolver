@@ -1,0 +1,74 @@
+<html>
+    <head>
+        <title>Wordle</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale = 1.0">
+
+        <link rel="stylesheet" href="wordle.css">
+        
+    </head>
+
+    <body>
+        <div id="titleContainer">
+            <h1 class="title">Wordle Assistant</h1>
+        </div>
+        <hr>
+        <div id="instructions">
+            <p>Enter your guess, then click on each tile to input the pattern.<br>
+                Hit enter to send the query.</p>
+        </div>
+        <div id="board">
+            <div id="tileContainer">
+                <div id="tile1" class="absent"></div>
+                <div id="tile2" class="absent"></div>
+                <div id="tile3" class="absent"></div>
+                <div id="tile4" class="absent"></div>
+                <div id="tile5" class="absent"></div>
+            </div>
+        </div>
+
+        <br>
+        <h1 id="ouput"></h1>
+    </body>
+    <script>
+        const classList = ["absent", "present", "correct"];
+        var classIndex = {"absent": 0,
+                         "present": 1,
+                         "correct": 2};
+        
+        let t1 = document.getElementById('tile1');
+        t1.addEventListener('click', function (event) {
+            var currClass = t1.className
+            t1.classList.remove(currClass);
+            t1.classList.add(classList[(classIndex[currClass] + 1) % 3]);
+        });
+
+        let t2 = document.getElementById('tile2');
+        t2.addEventListener('click', function (event) {
+            var currClass = t2.className
+            t2.classList.remove(currClass);
+            t2.classList.add(classList[(classIndex[currClass] + 1) % 3]);
+        });
+
+        let t3 = document.getElementById('tile3');
+        t3.addEventListener('click', function (event) {
+            var currClass = t3.className
+            t3.classList.remove(currClass);
+            t3.classList.add(classList[(classIndex[currClass] + 1) % 3]);
+        });
+
+        let t4 = document.getElementById('tile4');
+        t4.addEventListener('click', function (event) {
+            var currClass = t4.className
+            t4.classList.remove(currClass);
+            t4.classList.add(classList[(classIndex[currClass] + 1) % 3]);
+        });
+
+        let t5 = document.getElementById('tile5');
+        t5.addEventListener('click', function (event) {
+            var currClass = t5.className
+            t5.classList.remove(currClass);
+            t5.classList.add(classList[(classIndex[currClass] + 1) % 3]);
+        });
+    </script>
+</html>
