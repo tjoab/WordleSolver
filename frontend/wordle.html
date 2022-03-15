@@ -29,12 +29,64 @@
 
         <br>
         <h1 id="ouput"></h1>
+        <div class="keyboardRow">
+            <div id="KeyQ" class="keyTile">Q</div>
+            <div id="KeyW" class="keyTile">W</div>
+            <div id="KeyE" class="keyTile">E</div>
+            <div id="KeyR" class="keyTile">R</div>
+            <div id="KeyT" class="keyTile">T</div>
+            <div id="KeyY" class="keyTile">Y</div>
+            <div id="KeyU" class="keyTile">U</div>
+            <div id="KeyI" class="keyTile">I</div>
+            <div id="KeyO" class="keyTile">O</div>
+            <div id="KeyP" class="keyTile">P</div>
+        </div>
+        <div class="keyboardRow">
+            <div id="KeyA" class="keyTile">A</div>
+            <div id="KeyS" class="keyTile">S</div>
+            <div id="KeyD" class="keyTile">D</div>
+            <div id="KeyF" class="keyTile">F</div>
+            <div id="KeyG" class="keyTile">G</div>
+            <div id="KeyH" class="keyTile">H</div>
+            <div id="KeyJ" class="keyTile">J</div>
+            <div id="KeyK" class="keyTile">K</div>
+            <div id="KeyL" class="keyTile">L</div>
+        </div>
+        <div class="keyboardRow">
+            <div id="Enter" class="KeyEnter">Enter</div>
+            <div id="KeyZ" class="keyTile">Z</div>
+            <div id="KeyX" class="keyTile">X</div>
+            <div id="KeyC" class="keyTile">C</div>
+            <div id="KeyV" class="keyTile">V</div>
+            <div id="KeyB" class="keyTile">B</div>
+            <div id="KeyN" class="keyTile">N</div>
+            <div id="KeyM" class="keyTile">M</div>
+            <div id="Backspace" class="keyTile">⌫</div>
+        </div>
     </body>
     <script>
         const classList = ["absent", "present", "correct"];
         var classIndex = {"absent": 0,
                          "present": 1,
                          "correct": 2}; 
+
+        function processKey() {
+            e = { "code" : this.id };
+            processInput(e);
+        }
+
+        function processInput(e) {
+    
+            if ("KeyA" <= e.code && e.code <= "KeyZ") {
+                console.log(e.code[3])
+            }
+            else if (e.code == "Backspace") {
+                console.log(e.code[3])
+            }
+            else if (e.code == "Enter") {
+                console.log(e.code[3])
+            }
+        }
         
         let t1 = document.getElementById('tile1');
         t1.addEventListener('click', function (event) {
@@ -70,5 +122,23 @@
             t5.classList.remove(currClass);
             t5.classList.add(classList[(classIndex[currClass] + 1) % 3]);
         });
+
+        let keyboardRows = document.getElementsByClassName('keyboardRow');
+        
+        
+        for (let i = 0; i < keyboardRows.length; i++) {
+            let currRow = keyboardRows[i].children;
+           
+            for (let j = 0; j < currRow.length; j++) {
+                let key = currRow[j]
+                
+                key.addEventListener('click', processKey)
+            }
+        }
+        
+        document.addEventListener("keyup", (e) => {
+        processInput(e);
+        })
+        
     </script>
 </html>
