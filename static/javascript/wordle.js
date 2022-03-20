@@ -111,10 +111,12 @@ function processInput(e) {
             col = 1;
 
             // Send to python app
+            console.log(guess);
             $.post( "/", {
                 userGuess: guess,
                 userPattern: pattern 
             });
+            console.log(pattern);
             // Display results
             let resultSection = document.getElementById("resultsWrapper");
             
