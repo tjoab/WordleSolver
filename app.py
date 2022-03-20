@@ -10,53 +10,45 @@ from flask import (
 from wordle import *
 import time
 import json
+# Import cache
+from common import cache
 
 app = Flask(__name__)
+cache.init_app(app=app, config={"CACHE_TYPE": "filesystem",'CACHE_DIR': '/tmp'})
 
-global userGuess, userPattern, frequencyWeights, myWordList
-userGuess = None
-userPattern = None
-frequencyWeights = None
-myWordList = None
-
-frequencyWeights = commonWordWeighting()
-myWordList = getWordsFromFile("allowed_words.txt")
+cache.set("frequencyWeights", commonWordWeighting())
+cache.set("myWordList", getWordsFromFile("allowed_words.txt"))
 
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    global userGuess, userPattern
-    print("outside")
+
     if request.method == "POST":
-        userGuess = request.form['userGuess']
-        userPattern = request.form['userPattern']
-        print(userGuess)
-        print(userPattern)
+        cache.set("uGuess", request.form['userGuess'])
+        cache.set("uPattern", request.form['userPattern'])
         
     return render_template("wordle.html")
 
 
 @app.route('/restart', methods=['POST'])
 def restart():
-    print("restart")
-    global myWordList
     if request.method == "POST":
-        myWordList = getWordsFromFile("allowed_words.txt")
+        cache.set("myWordList", getWordsFromFile("allowed_words.txt"))
     return 'restarted'
 
 
 @app.route('/getpythondata')
 def get_python_data():
-    time.sleep(1.5)
-    global userGuess, userPattern, frequencyWeights, myWordList
-    print("get")
-    print(userGuess)
-    print(userPattern)
-    if len(myWordList) != 1:
-        myWordList = getResultantWords(userGuess.lower(), userPattern, myWordList)
-        
+    time.sleep(1)
 
-        rankings = rankedChoices(myWordList, frequencyWeights)
+    if len(cache.get("myWordList")) != 1:
+        myWordList = cache.get("myWordList")
+        
+        updatedWordList = getResultantWords(cache.get("uGuess").lower(), cache.get("uPattern"), myWordList)
+
+        cache.set("myWordList", updatedWordList)
+
+        rankings = rankedChoices(cache.get("myWordList"), cache.get("frequencyWeights"))
 
         topGuesses = {}
         i = 1
@@ -70,4 +62,4 @@ def get_python_data():
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000, threaded=True)
+    app.run(host="0.0.0.0", port=5000)
