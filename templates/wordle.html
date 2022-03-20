@@ -1,0 +1,89 @@
+<html>
+    <head>
+        <title>Wordle</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale = 1.0">
+
+        <link rel="stylesheet" href="{{url_for('static', filename='css/wordle.css')}}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="{{url_for('static', filename='javascript/wordle.js')}}"></script>
+    </head>
+
+    <body>
+        <div id="titleContainer">
+            <h1 class="title">Wordle Assistant</h1>
+        </div>
+        <hr>
+        <div id="instructions">
+            <p>Enter your guess, then click on each tile to input the pattern.<br>
+                Hit enter to send the query. {{ t }}</p>
+        </div>
+        <div id="board">
+            <div id="tileContainer">
+                <div id="tile1" class="empty"></div>
+                <div id="tile2" class="empty"></div>
+                <div id="tile3" class="empty"></div>
+                <div id="tile4" class="empty"></div>
+                <div id="tile5" class="empty"></div>
+            </div>
+        </div>
+        <div id="updateMessage">
+            <p class="updateText"></p>
+        </div>
+        <div class="keyboardRow">
+            <div id="KeyQ" class="keyTile">Q</div>
+            <div id="KeyW" class="keyTile">W</div>
+            <div id="KeyE" class="keyTile">E</div>
+            <div id="KeyR" class="keyTile">R</div>
+            <div id="KeyT" class="keyTile">T</div>
+            <div id="KeyY" class="keyTile">Y</div>
+            <div id="KeyU" class="keyTile">U</div>
+            <div id="KeyI" class="keyTile">I</div>
+            <div id="KeyO" class="keyTile">O</div>
+            <div id="KeyP" class="keyTile">P</div>
+        </div>
+        <div class="keyboardRow">
+            <div id="KeyA" class="keyTile">A</div>
+            <div id="KeyS" class="keyTile">S</div>
+            <div id="KeyD" class="keyTile">D</div>
+            <div id="KeyF" class="keyTile">F</div>
+            <div id="KeyG" class="keyTile">G</div>
+            <div id="KeyH" class="keyTile">H</div>
+            <div id="KeyJ" class="keyTile">J</div>
+            <div id="KeyK" class="keyTile">K</div>
+            <div id="KeyL" class="keyTile">L</div>
+        </div>
+        <div class="keyboardRow">
+            <div id="Enter" class="KeyEnter">Enter</div>
+            <div id="KeyZ" class="keyTile">Z</div>
+            <div id="KeyX" class="keyTile">X</div>
+            <div id="KeyC" class="keyTile">C</div>
+            <div id="KeyV" class="keyTile">V</div>
+            <div id="KeyB" class="keyTile">B</div>
+            <div id="KeyN" class="keyTile">N</div>
+            <div id="KeyM" class="keyTile">M</div>
+            <div id="Backspace" class="keyTile">⌫</div>
+        </div>
+        <div class="keyboardRow">
+            <div id="Restart" class="keyRestart">⟳ Restart</div>
+        </div>
+        <div id="alert"></div>
+        <div id="resultsWrapper" class="hidden">
+            <div id="resultRow"> 
+                <div id="rowElement" class="rank"></div>
+                <div id="rowElement" class="guess"></div>
+                <div id="rowElement" class="bits"></div>
+            </div>
+            <div id="resultRow">
+                <div id="rowElement" class="rank"></div>
+                <div id="rowElement" class="guess"></div>
+                <div id="rowElement" class="bits"></div>
+            </div>
+            <div id="resultRow">
+                <div id="rowElement" class="rank"></div>
+                <div id="rowElement" class="guess"></div>
+                <div id="rowElement" class="bits"></div>
+            </div>
+        </div>
+    </body>
+</html>
